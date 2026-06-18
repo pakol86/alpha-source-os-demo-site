@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alpha Source OS Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <aside class="sidebar">
+      <div class="brand-block">
+        <div class="brand-mark">AS</div>
+        <div>
+          <h1>Alpha Source OS</h1>
+          <p>AI governance workflow and evidence system</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-btn is-active" data-section="dashboard">Dashboard</button>
+        <button class="nav-btn" data-section="intake">Intake</button>
+        <button class="nav-btn" data-section="registry">Use Cases</button>
+        <button class="nav-btn" data-section="approvals">Approvals</button>
+        <button class="nav-btn" data-section="vendors">Vendors</button>
+        <button class="nav-btn" data-section="controls">Controls</button>
+        <button class="nav-btn" data-section="evidence">Evidence Packs</button>
+        <button class="nav-btn" data-section="integrations">Integrations</button>
+      </nav>
+
+      <div class="sidebar-note">
+        <strong>Phase 2 prototype</strong>
+        <p>Dummy data only. This demo now simulates client-facing registry, approvals, controls, and evidence operations.</p>
+      </div>
+    </aside>
+
+    <main class="main-panel">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Draft product concept</p>
+          <h2 id="section-title">Dashboard</h2>
+        </div>
+        <div class="topbar-meta">
+          <span id="region-badge">Region: Mexico</span>
+          <span id="framework-badge">Frameworks: NIST AI RMF / ISO 42001</span>
+          <span id="snapshot-badge">Snapshot: Q2 2026</span>
+        </div>
+      </header>
+
+      <section id="dashboard" class="content-section is-visible">
+        <div class="metric-grid" id="metric-grid"></div>
+        <div class="panel-grid two-up">
+          <article class="panel-card">
+            <div class="panel-header">
+              <h3>High-Risk Workflows</h3>
+              <span>Needs review</span>
+            </div>
+            <div id="risk-list" class="stack-list"></div>
+          </article>
+          <article class="panel-card">
+            <div class="panel-header">
+              <h3>Approval Queue</h3>
+              <span>Ready for decision</span>
+            </div>
+            <div id="approval-preview" class="stack-list"></div>
+          </article>
+        </div>
+        <div class="panel-grid two-up">
+          <article class="panel-card">
+            <div class="panel-header">
+              <h3>Control Gaps</h3>
+              <span>Remediation required</span>
+            </div>
+            <div id="control-gap-list" class="stack-list"></div>
+          </article>
+          <article class="panel-card">
+            <div class="panel-header">
+              <h3>Recent Activity</h3>
+              <span>Session log</span>
+            </div>
+            <div id="activity-list" class="timeline-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="intake" class="content-section">
+        <div class="section-intro">
+          <h3>Use-Case Intake</h3>
+          <p>Create a new workflow request, attach a governance posture, and route it into the approval queue.</p>
+        </div>
+        <div class="panel-grid two-up">
+          <article class="panel-card">
+            <div class="panel-header">
+              <h3>New Request</h3>
+              <span>Alpha intake flow</span>
+            </div>
+            <form id="intake-form" class="form-grid">
+              <label class="input-chip">
+                <span>Workflow title</span>
+                <input id="intake-title" name="title" type="text" required placeholder="Example: Procurement contract analyzer">
+              </label>
+              <label class="input-chip">
+                <span>Owner</span>
+                <input id="intake-owner" name="owner" type="text" required placeholder="Example: Procurement Ops">
+              </label>
+              <label class="input-chip">
+                <span>Vendor</span>
+                <select id="intake-vendor" name="vendor"></select>
+              </label>
+              <label class="input-chip">
+                <span>Data sensitivity</span>
+                <select id="intake-sensitivity" name="sensitivity">
+                  <option>Internal only</option>
+                  <option>Commercial</option>
+                  <option>Confidential contracts</option>
+                  <option>Sensitive PII</option>
+                  <option>Sensitive KYC data</option>
+                </select>
+              </label>
+              <label class="input-chip">
+                <span>Risk level</span>
+                <select id="intake-risk" name="risk">
+                  <option>Low</option>
+                  <option selected>Medium</option>
+                  <option>High</option>
+                </select>
+              </label>
+              <label class="input-chip">
+                <span>Review date</span>
+                <input id="intake-review-date" name="reviewDate" type="date" required>
+              </label>
+              <label class="input-chip input-chip-wide">
+                <span>Description</span>
+                <textarea id="intake-description" name="description" rows="4" required placeholder="Describe what the workflow does, which teams use it, and what systems it touches."></textarea>
+              </label>
+              <label class="input-chip input-chip-wide">
+                <span>Initial control notes</span>
+                <textarea id="intake-notes" name="notes" rows="4" placeholder="Short governance conditions, blockers, or operating notes."></textarea>
+              </label>
+              <div class="action-row">
+                <button type="submit" class="action-btn good">Create request</button>
+                <button type="button" id="reset-demo-btn" class="action-btn bad">Reset demo data</button>
+              </div>
+            </form>
+          </article>
+          <article class="detail-card">
+            <div class="detail-header">
+              <div>
+                <p class="detail-eyebrow">Alpha readiness</p>
+                <h3>Tester flow</h3>
+              </div>
+              <span class="mini-tone warn">Browser only</span>
+            </div>
+            <div id="intake-preview" class="preview-card"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="registry" class="content-section">
+        <div class="section-intro">
+          <h3>AI Use-Case Registry</h3>
+          <p>Search, filter, and review workflow records with owner, data, risk, controls, and evidence readiness.</p>
+        </div>
+        <div class="toolbar">
+          <label class="input-chip">
+            <span>Search</span>
+            <input id="registry-search" type="search" placeholder="Search workflow, owner, or vendor">
+          </label>
+          <label class="input-chip">
+            <span>Status</span>
+            <select id="registry-status-filter"></select>
+          </label>
+          <label class="input-chip">
+            <span>Sensitivity</span>
+            <select id="registry-sensitivity-filter"></select>
+          </label>
+        </div>
+        <div class="split-layout">
+          <div id="registry-list" class="record-list"></div>
+          <article class="detail-card" id="registry-detail"></article>
+        </div>
+      </section>
+
+      <section id="approvals" class="content-section">
+        <div class="section-intro">
+          <h3>Approval Workflow</h3>
+          <p>Simulate intake decisions, compensating controls, and ownership routing before a use case goes live.</p>
+        </div>
+        <div class="split-layout">
+          <div id="approval-list" class="record-list"></div>
+          <article class="detail-card">
+            <div id="approval-detail"></div>
+            <div class="action-row">
+              <button class="action-btn good" id="approve-btn">Approve</button>
+              <button class="action-btn warn" id="conditional-btn">Approve with conditions</button>
+              <button class="action-btn bad" id="reject-btn">Reject</button>
+            </div>
+            <p class="helper-copy">Decisions update the queue state inside this browser session only.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="vendors" class="content-section">
+        <div class="section-intro">
+          <h3>Vendor Due-Diligence Tracker</h3>
+          <p>Track legal, security, procurement, and data-handling checkpoints across model providers and productivity tools.</p>
+        </div>
+        <div class="split-layout">
+          <div id="vendor-list" class="record-list"></div>
+          <article class="detail-card" id="vendor-detail"></article>
+        </div>
+      </section>
+
+      <section id="controls" class="content-section">
+        <div class="section-intro">
+          <h3>Risk and Control Map</h3>
+          <p>View control obligations by framework, current maturity, and open remediation actions tied to workflows.</p>
+        </div>
+        <div class="panel-grid two-up">
+          <article class="panel-card">
+            <div class="panel-header">
+              <h3>Control Library</h3>
+              <span>Framework mapped</span>
+            </div>
+            <div id="control-library" class="stack-list"></div>
+          </article>
+          <article class="panel-card">
+            <div class="panel-header">
+              <h3>Open Remediation Queue</h3>
+              <span>Owners assigned</span>
+            </div>
+            <div id="remediation-list" class="stack-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="evidence" class="content-section">
+        <div class="section-intro">
+          <h3>Evidence Pack Builder</h3>
+          <p>Assemble tailored board, customer, and legal outputs from the registry, vendor reviews, and control state.</p>
+        </div>
+        <div class="panel-grid two-up">
+          <article class="panel-card">
+            <div class="panel-header">
+              <h3>Pack Composer</h3>
+              <span>Dynamic preview</span>
+            </div>
+            <div class="form-grid">
+              <label class="input-chip">
+                <span>Pack type</span>
+                <select id="evidence-pack-select"></select>
+              </label>
+              <label class="input-chip">
+                <span>Primary workflow</span>
+                <select id="evidence-use-case-select"></select>
+              </label>
+              <label class="input-chip">
+                <span>Audience</span>
+                <select id="evidence-audience-select"></select>
+              </label>
+            </div>
+            <div id="evidence-summary" class="summary-card"></div>
+            <div class="action-row">
+              <button class="action-btn good" id="export-evidence-btn">Export packet</button>
+            </div>
+          </article>
+          <article class="panel-card">
+            <div class="panel-header">
+              <h3>Preview Output</h3>
+              <span>What the packet includes</span>
+            </div>
+            <div id="evidence-preview" class="preview-card"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="integrations" class="content-section">
+        <div class="section-intro">
+          <h3>Integration Layer</h3>
+          <p>See where Alpha Source OS would ingest telemetry, route work, and publish evidence into client systems.</p>
+        </div>
+        <div id="integration-grid" class="panel-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="./data/demo-data.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
